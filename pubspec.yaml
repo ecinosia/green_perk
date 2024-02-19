@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   go_router: ^13.2.0
-  image_picker: ^1.0.7
+
 dev_dependencies:
   flutter_lints: ^3.0.0
   flutter_test:
@@ -18,3 +18,11 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+
+  assets:
+    - lib/assets/images/
+
+  fonts:
+    - family: Boardley
+      fonts:
+        - asset: lib/assets/fonts/boardley.ttf
