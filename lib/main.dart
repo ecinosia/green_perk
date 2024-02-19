@@ -5,6 +5,7 @@ import 'package:green_perk/pages/registerPage/register_page.dart';
 import 'package:green_perk/pages/signInPage/sign_in_page.dart';
 import 'package:green_perk/pages/signInRegisterPage/sign_in_register_page.dart';
 import 'package:green_perk/pages/welcomePage/welcome_page.dart';
+import 'package:green_perk/testPages/cam_test.dart';
 
 void main() {
   runApp(const MainApp());
@@ -18,12 +19,12 @@ final GoRouter _router = GoRouter(
         return const WelcomePage();
       },
       routes: <RouteBase>[
-        // GoRoute(
-        //   path: 'camera_test_page',
-        //   builder: (BuildContext context, GoRouterState state) {
-        //     return const CameraTestPage();
-        //   },
-        // ),
+        GoRoute(
+          path: 'camera_test_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const CameraTestPage();
+          },
+        ),
         GoRoute(
           path: 'home_page',
           builder: (BuildContext context, GoRouterState state) {
