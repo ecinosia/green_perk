@@ -1,0 +1,9 @@
+Battery
+Brown-Glass
+Cardboard
+Green-Glass
+Metal
+Paper
+Plastic
+Trash
+White-Glass

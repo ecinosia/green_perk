@@ -21,7 +21,7 @@ class LetsGoButton extends StatelessWidget {
               color: AppColors.textGreen,
             )),
         child: Text(
-          "Let's Go",
+          "Get Started!",
           style: TextStyle(
             color: AppColors.textGreen,
             fontSize: 25,
