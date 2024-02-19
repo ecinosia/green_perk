@@ -1,14 +1,12 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/components/h40_custom_sized_box.dart';
-import 'package:green_perk/pages/homePage/home_page.dart';
 
 import '../../constants/app_colors.dart';
 import 'components/custom_text_form_field_widget.dart';
 import 'components/input_label.dart';
+import 'components/password_confirm_text_form_field_widget.dart';
+import 'components/password_text_form_field_widget.dart';
+import 'components/sign_up_button.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,56 +20,6 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
-
-  final FirebaseAuthService auth = FirebaseAuthService();
-  bool tahir = false;
-
-  // void registerFirebase() async {
-  //   String fullname = fullNameController.text;
-  //   String email = emailController.text;
-  //   String password = passwordController.text;
-
-  //   try {
-  //     await auth.signUpWithEmailAndPassword(email, password, fullname);
-  //     debugPrint("successful");
-  //     tahir = true;
-  //   } catch (e) {
-  //     debugPrint(e.toString().split("] ")[1]);
-  //   }
-  // }
-  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  final dbRef = FirebaseFirestore.instance.collection("users");
-  void registerToFb() {
-    firebaseAuth
-        .createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text)
-        .then((result) {
-      dbRef.doc(result.user!.uid).set({
-        'fullname': fullNameController.text,
-        'email': emailController.text,
-        'password': passwordController.text,
-      }).then((res) {
-        context.go('/home_page');
-      });
-    }).catchError((err) {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text("Error"),
-              content: Text(err.message),
-              actions: [
-                TextButton(
-                  child: Text("Ok"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                )
-              ],
-            );
-          });
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,81 +82,18 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const H40CustomSizedBox(),
                   const InputLabel(text: 'Password'),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: Material(
-                      elevation: 7,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      color: AppColors.primaryBlue,
-                      child: TextFormField(
-                        obscureText: true,
-                        controller: passwordController,
-                        cursorColor: AppColors.textPink,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                              color: AppColors.textPink,
-                            ),
-                          ),
-                          floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        ),
-                      ),
-                    ),
-                  ),
+                  PasswordTextFormFieldWidget(
+                      passwordController: passwordController),
                   const H40CustomSizedBox(),
                   const InputLabel(text: 'Confirm Password'),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 20.0, right: 20),
-                    child: Material(
-                      elevation: 7,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(50),
-                      ),
-                      color: AppColors.primaryBlue,
-                      child: TextFormField(
-                        obscureText: true,
-                        controller: passwordConfirmController,
-                        cursorColor: AppColors.textPink,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                          ),
-                          focusedBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(50),
-                            borderSide: BorderSide(
-                              color: AppColors.textPink,
-                            ),
-                          ),
-                          floatingLabelBehavior: FloatingLabelBehavior.auto,
-                        ),
-                      ),
-                    ),
-                  ),
+                  PasswordConfirmTextFormFieldWidget(
+                      passwordConfirmController: passwordConfirmController),
                   const H40CustomSizedBox(),
-                  ElevatedButton(
-                    onPressed: () {
-                      registerToFb();
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: AppColors.textPink,
-                      minimumSize: const Size(
-                        150,
-                        50,
-                      ),
-                    ),
-                    child: Text(
-                      "Sign Up",
-                      style: TextStyle(
-                        fontSize: 24,
-                        color: AppColors.primaryBlue,
-                      ),
-                    ),
+                  SignUpButton(
+                    fullNameController: fullNameController,
+                    emailController: emailController,
+                    passwordController: passwordController,
+                    passwordConfirmController: passwordConfirmController,
                   ),
                 ],
               ),
