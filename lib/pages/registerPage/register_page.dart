@@ -14,10 +14,10 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
-  TextEditingController firstNameController = TextEditingController();
-  TextEditingController lastNameController = TextEditingController();
+  TextEditingController fullNameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
+  TextEditingController passwordConfirmController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,14 +69,9 @@ class _RegisterPageState extends State<RegisterPage> {
               ),
               Column(
                 children: [
-                  const InputLabel(text: 'First Name'),
+                  const InputLabel(text: 'Full Name'),
                   CustomTextFormFieldWidget(
-                    controller: firstNameController,
-                  ),
-                  const H40CustomSizedBox(),
-                  const InputLabel(text: 'Last Name'),
-                  CustomTextFormFieldWidget(
-                    controller: lastNameController,
+                    controller: fullNameController,
                   ),
                   const H40CustomSizedBox(),
                   const InputLabel(text: 'E-mail'),
@@ -96,6 +91,35 @@ class _RegisterPageState extends State<RegisterPage> {
                       child: TextFormField(
                         obscureText: true,
                         controller: passwordController,
+                        cursorColor: AppColors.textPink,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          focusedBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(50),
+                            borderSide: BorderSide(
+                              color: AppColors.textPink,
+                            ),
+                          ),
+                          floatingLabelBehavior: FloatingLabelBehavior.auto,
+                        ),
+                      ),
+                    ),
+                  ),
+                  const H40CustomSizedBox(),
+                  const InputLabel(text: 'Confirm Password'),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0, right: 20),
+                    child: Material(
+                      elevation: 7,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(50),
+                      ),
+                      color: AppColors.primaryBlue,
+                      child: TextFormField(
+                        obscureText: true,
+                        controller: passwordConfirmController,
                         cursorColor: AppColors.textPink,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(
