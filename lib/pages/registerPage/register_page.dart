@@ -1,6 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/components/h40_custom_sized_box.dart';
+import 'package:green_perk/pages/homePage/home_page.dart';
 
 import '../../constants/app_colors.dart';
 import 'components/custom_text_form_field_widget.dart';
@@ -18,6 +22,56 @@ class _RegisterPageState extends State<RegisterPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController passwordConfirmController = TextEditingController();
+
+  final FirebaseAuthService auth = FirebaseAuthService();
+  bool tahir = false;
+
+  // void registerFirebase() async {
+  //   String fullname = fullNameController.text;
+  //   String email = emailController.text;
+  //   String password = passwordController.text;
+
+  //   try {
+  //     await auth.signUpWithEmailAndPassword(email, password, fullname);
+  //     debugPrint("successful");
+  //     tahir = true;
+  //   } catch (e) {
+  //     debugPrint(e.toString().split("] ")[1]);
+  //   }
+  // }
+  FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final dbRef = FirebaseFirestore.instance.collection("users");
+  void registerToFb() {
+    firebaseAuth
+        .createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text)
+        .then((result) {
+      dbRef.doc(result.user!.uid).set({
+        'fullname': fullNameController.text,
+        'email': emailController.text,
+        'password': passwordController.text,
+      }).then((res) {
+        context.go('/home_page');
+      });
+    }).catchError((err) {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(err.message),
+              actions: [
+                TextButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -138,7 +192,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const H40CustomSizedBox(),
                   ElevatedButton(
-                    onPressed: () => context.go('/home_page'),
+                    onPressed: () {
+                      registerToFb();
+                    },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColors.textPink,
                       minimumSize: const Size(
