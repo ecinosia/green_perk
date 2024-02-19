@@ -10,8 +10,9 @@ void main() {
   runApp(const MainApp());
 }
 
-final GoRouter _router = GoRouter(routes: <RouteBase>[
-  GoRoute(
+final GoRouter _router = GoRouter(
+  routes: <RouteBase>[
+    GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
         return const WelcomePage();
@@ -47,8 +48,10 @@ final GoRouter _router = GoRouter(routes: <RouteBase>[
             return const RegisterPage();
           },
         ),
-      ])
-]);
+      ],
+    ),
+  ],
+);
 
 class MainApp extends StatelessWidget {
   const MainApp({super.key});
