@@ -1,45 +1,43 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/foundation.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
-class FirebaseAuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final userCollection = FirebaseFirestore.instance.collection("users");
+void registerToFb(
+    BuildContext context,
+    TextEditingController fullNameController,
+    TextEditingController emailController,
+    TextEditingController passwordController) {
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  final dbRef = FirebaseFirestore.instance.collection("users");
 
-  User? get currentUser => _auth.currentUser;
-
-  Future<User?> signUpWithEmailAndPassword(
-      String email, String password, String fullname) async {
-    try {
-      UserCredential credential = await _auth.createUserWithEmailAndPassword(
-          email: email, password: password);
-
-      await userCollection.doc(credential.user!.uid).set({
-        'fullname': fullname,
-        'email': email,
-        'password': password,
-      });
-
-      return credential.user;
-    } catch (e) {
-      debugPrint("Error signing up: $e");
-      return null;
-    }
-  }
-
-  Future<User?> signInWithEmailAndPassword(
-      String email, String password) async {
-    try {
-      UserCredential credential = await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-      return credential.user;
-    } catch (e) {
-      debugPrint("Error signing in: $e");
-      return null;
-    }
-  }
-
-  Future<void> signOut() async {
-    await _auth.signOut();
-  }
+  auth
+      .createUserWithEmailAndPassword(
+          email: emailController.text, password: passwordController.text)
+      .then((result) {
+    dbRef.doc(result.user!.uid).set({
+      'fullname': fullNameController.text,
+      'email': emailController.text,
+      'password': passwordController.text,
+    }).then((res) {
+      context.go('/home_page');
+    });
+  }).catchError((err) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Error"),
+            content: Text(err.message),
+            actions: [
+              TextButton(
+                child: const Text("Ok"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  });
 }
