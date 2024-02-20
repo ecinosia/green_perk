@@ -4,7 +4,10 @@ import 'package:green_perk/constants/app_colors.dart';
 class EmailInputField extends StatelessWidget {
   const EmailInputField({
     super.key,
+    required this.emailController,
   });
+
+  final TextEditingController emailController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class EmailInputField extends StatelessWidget {
         ),
         color: AppColors.primaryBlue,
         child: TextFormField(
+          controller: emailController,
           cursorColor: AppColors.textPink,
           decoration: InputDecoration(
             border: OutlineInputBorder(

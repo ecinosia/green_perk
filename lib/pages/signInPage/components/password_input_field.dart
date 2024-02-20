@@ -4,7 +4,10 @@ import 'package:green_perk/constants/app_colors.dart';
 class PasswordInputField extends StatelessWidget {
   const PasswordInputField({
     super.key,
+    required this.passwordController,
   });
+
+  final TextEditingController passwordController;
 
   @override
   Widget build(BuildContext context) {
@@ -17,6 +20,7 @@ class PasswordInputField extends StatelessWidget {
         ),
         color: AppColors.primaryBlue,
         child: TextFormField(
+          controller: passwordController,
           obscureText: true,
           cursorColor: AppColors.textPink,
           decoration: InputDecoration(

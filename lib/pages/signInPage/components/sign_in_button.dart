@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/constants/app_colors.dart';
 
-class SignInButton extends StatelessWidget {
+class SignInButton extends StatefulWidget {
   const SignInButton({
     super.key,
+    required this.emailController,
+    required this.passwordController,
   });
 
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  @override
+  State<SignInButton> createState() => _SignInButtonState();
+}
+
+class _SignInButtonState extends State<SignInButton> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: () => context.go('/home_page'),
+      onPressed: () {
+        signIn(context, widget.emailController, widget.passwordController);
+      },
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.textPink,
         minimumSize: const Size(
