@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/constants/app_colors.dart';
 
-class SignUpButton extends StatelessWidget {
+class SignUpButton extends StatefulWidget {
   const SignUpButton({
     super.key,
     required this.fullNameController,
@@ -17,10 +17,15 @@ class SignUpButton extends StatelessWidget {
   final TextEditingController passwordConfirmController;
 
   @override
+  State<SignUpButton> createState() => _SignUpButtonState();
+}
+
+class _SignUpButtonState extends State<SignUpButton> {
+  @override
   Widget build(BuildContext context) {
     return ElevatedButton(
       onPressed: () {
-        if (fullNameController.text == "") {
+        if (widget.fullNameController.text == "") {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -38,7 +43,7 @@ class SignUpButton extends StatelessWidget {
               );
             },
           );
-        } else if (emailController.text == "") {
+        } else if (widget.emailController.text == "") {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -56,7 +61,7 @@ class SignUpButton extends StatelessWidget {
               );
             },
           );
-        } else if (passwordController.text == "") {
+        } else if (widget.passwordController.text == "") {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -74,7 +79,8 @@ class SignUpButton extends StatelessWidget {
               );
             },
           );
-        } else if (passwordController.text != passwordConfirmController.text) {
+        } else if (widget.passwordController.text !=
+            widget.passwordConfirmController.text) {
           showDialog(
             context: context,
             builder: (BuildContext context) {
@@ -93,8 +99,8 @@ class SignUpButton extends StatelessWidget {
             },
           );
         } else {
-          registerToFb(
-              context, fullNameController, emailController, passwordController);
+          registerToFb(context, widget.fullNameController,
+              widget.emailController, widget.passwordController);
         }
       },
       style: ElevatedButton.styleFrom(
