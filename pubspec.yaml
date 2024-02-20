@@ -7,14 +7,16 @@ environment:
   sdk: '>=3.3.0 <4.0.0'
 
 dependencies:
+  cloud_firestore: ^4.15.5
+  firebase_auth: ^4.17.5
+  firebase_core: ^2.24.2
   flutter:
     sdk: flutter
-  go_router: ^13.2.0 
+  flutter_gemini: ^2.0.3
+  flutter_tflite: ^1.0.1
+  go_router: ^13.2.0
   image_picker: ^0.8.9
-  flutter_tflite: ^1.0.1 
-  firebase_core: ^2.24.2
-  firebase_auth: ^4.17.5
-  cloud_firestore: ^4.15.5
+  pedometer: ^4.0.1
 
 dev_dependencies:
   flutter_lints: ^3.0.0
@@ -32,3 +34,9 @@ flutter:
     - family: Boardley
       fonts:
         - asset: lib/assets/fonts/boardley.ttf
+    - family: Cy Grotestk Key
+      fonts:
+        - asset: lib/assets/fonts/cy_grotestk_key.ttf
+    - family: Google Sans
+      fonts:
+        - asset: lib/assets/fonts/google_sans.ttf
