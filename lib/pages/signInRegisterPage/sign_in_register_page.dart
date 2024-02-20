@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-
 import '../../constants/app_colors.dart';
+import 'components/sign_in_register_button.dart';
 
 class SignInRegisterPage extends StatefulWidget {
   const SignInRegisterPage({super.key});
@@ -23,39 +22,42 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Row(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 30),
-                child: Align(
-                  alignment: Alignment.bottomLeft,
-                  child: Image.asset(
-                    "lib/assets/images/left_corner.png",
-                    width: 30,
+          Hero(
+            tag: 'makeplanetgreenagain',
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 30),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Image.asset(
+                      "lib/assets/images/left_corner.png",
+                      width: 30,
+                    ),
                   ),
                 ),
-              ),
-              RichText(
-                text: TextSpan(
-                  children: [
-                    textSpan("make ", AppColors.primaryBlue),
-                    textSpan("planet ", AppColors.primaryBlue),
-                    textSpan("green ", AppColors.textPink),
-                    textSpan("again", AppColors.primaryBlue),
-                  ],
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 30),
-                child: Align(
-                  alignment: Alignment.topRight,
-                  child: Image.asset(
-                    "lib/assets/images/right_corner.png",
-                    width: 30,
+                RichText(
+                  text: TextSpan(
+                    children: [
+                      textSpan("make ", AppColors.primaryBlue),
+                      textSpan("planet ", AppColors.primaryBlue),
+                      textSpan("green ", AppColors.textPink),
+                      textSpan("again", AppColors.primaryBlue),
+                    ],
                   ),
                 ),
-              ),
-            ],
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 30),
+                  child: Align(
+                    alignment: Alignment.topRight,
+                    child: Image.asset(
+                      "lib/assets/images/right_corner.png",
+                      width: 30,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
           const Column(
             children: [
@@ -86,38 +88,5 @@ class _SignInRegisterPageState extends State<SignInRegisterPage> {
           color: color,
           fontWeight: FontWeight.w100,
         ));
-  }
-}
-
-class SignInRegisterButton extends StatelessWidget {
-  const SignInRegisterButton({
-    super.key,
-    required this.text,
-    required this.route,
-  });
-
-  final String text;
-  final String route;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: 250,
-      child: ElevatedButton(
-        onPressed: () => context.go(route),
-        style: ElevatedButton.styleFrom(
-            backgroundColor: AppColors.primaryBlue,
-            textStyle: TextStyle(
-              color: AppColors.textGreen,
-            )),
-        child: Text(
-          text,
-          style: TextStyle(
-            color: AppColors.textGreen,
-            fontSize: 25,
-          ),
-        ),
-      ),
-    );
   }
 }

@@ -13,6 +13,9 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
+TextEditingController emailController = TextEditingController();
+TextEditingController passwordController = TextEditingController();
+
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
@@ -27,16 +30,26 @@ class _SignInPageState extends State<SignInPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            textWidget(),
-            const Column(
+            Hero(
+              tag: 'makeplanetgreenagain',
+              child: textWidget(),
+            ),
+            Column(
               children: [
-                InputLabelText(text: 'E-mail'),
-                EmailInputField(),
-                H40CustomSizedBox(),
-                InputLabelText(text: 'Password'),
-                PasswordInputField(),
-                H40CustomSizedBox(),
-                SignInButton(),
+                const InputLabelText(text: 'E-mail'),
+                EmailInputField(
+                  emailController: emailController,
+                ),
+                const H40CustomSizedBox(),
+                const InputLabelText(text: 'Password'),
+                PasswordInputField(
+                  passwordController: passwordController,
+                ),
+                const H40CustomSizedBox(),
+                SignInButton(
+                  emailController: emailController,
+                  passwordController: passwordController,
+                ),
               ],
             ),
           ],

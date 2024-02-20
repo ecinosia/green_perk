@@ -35,39 +35,42 @@ class _RegisterPageState extends State<RegisterPage> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(top: 30),
-                    child: Align(
-                      alignment: Alignment.bottomLeft,
-                      child: Image.asset(
-                        "lib/assets/images/left_corner.png",
-                        width: 30,
+              Hero(
+                tag: 'makeplanetgreenagain',
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Image.asset(
+                          "lib/assets/images/left_corner.png",
+                          width: 30,
+                        ),
                       ),
                     ),
-                  ),
-                  RichText(
-                    text: TextSpan(
-                      children: [
-                        textSpan("make ", AppColors.primaryBlue),
-                        textSpan("planet ", AppColors.primaryBlue),
-                        textSpan("green ", AppColors.textPink),
-                        textSpan("again", AppColors.primaryBlue),
-                      ],
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: Align(
-                      alignment: Alignment.topRight,
-                      child: Image.asset(
-                        "lib/assets/images/right_corner.png",
-                        width: 30,
+                    RichText(
+                      text: TextSpan(
+                        children: [
+                          textSpan("make ", AppColors.primaryBlue),
+                          textSpan("planet ", AppColors.primaryBlue),
+                          textSpan("green ", AppColors.textPink),
+                          textSpan("again", AppColors.primaryBlue),
+                        ],
                       ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 30),
+                      child: Align(
+                        alignment: Alignment.topRight,
+                        child: Image.asset(
+                          "lib/assets/images/right_corner.png",
+                          width: 30,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               Column(
                 children: [
