@@ -1,15 +1,17 @@
-import 'dart:io';
+// ignore_for_file: prefer_typing_uninitialized_variables
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tflite/flutter_tflite.dart';
-import 'package:green_perk/components/h40_custom_sized_box.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../auth/auth.dart';
+import '../../components/h10_custom_sized_box.dart';
 import '../../components/nav_bar.dart';
+import '../../components/page_title_widget.dart';
 import '../../constants/app_colors.dart';
 import 'components/custom_elevated_button_for_image.dart';
+import 'components/image_widget.dart';
+import 'components/select_image_text_widget.dart';
 
 class RecyclePage extends StatefulWidget {
   const RecyclePage({super.key});
@@ -24,7 +26,9 @@ class _RecyclePageState extends State<RecyclePage> {
   String label = '';
   String userUid = "";
   String userName = "";
+  var userNameManipulated;
   int userPoints = 0;
+  int recycleCount = 0;
   String congrats = "";
 
   @override
@@ -33,21 +37,7 @@ class _RecyclePageState extends State<RecyclePage> {
     _tfLiteInit();
     setState(() {
       userUid = returnUserName()!;
-      // userPoints = getUserPoints();
     });
-
-    FirebaseFirestore.instance
-        .collection('users')
-        .doc(userUid)
-        .get()
-        .then((DocumentSnapshot ds) {
-      setState(() {
-        userPoints = ds['green_points'];
-      });
-    });
-  }
-
-  void getUserName() {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userUid)
@@ -55,6 +45,17 @@ class _RecyclePageState extends State<RecyclePage> {
         .then((DocumentSnapshot ds) {
       setState(() {
         userName = ds['fullname'];
+        userNameManipulated = userName.split(' ');
+      });
+    });
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(userUid)
+        .get()
+        .then((DocumentSnapshot ds) {
+      setState(() {
+        userPoints = ds['green_points'];
+        recycleCount = ds['recycle_count'];
       });
     });
   }
@@ -111,6 +112,7 @@ class _RecyclePageState extends State<RecyclePage> {
         label == 'Trash' ||
         label == 'White-Glass') {
       userPoints += 50;
+      recycleCount += 1;
       updateUserPoint();
     }
   }
@@ -118,9 +120,10 @@ class _RecyclePageState extends State<RecyclePage> {
   void updateUserPoint() {
     FirebaseFirestore.instance.collection('users').doc(userUid).update({
       'green_points': userPoints,
+      'recycle_count': recycleCount,
     });
     setState(() {
-      congrats = "Congrats $userName. You won 50 points!";
+      congrats = "Congrats ${userNameManipulated[0]}. You won 50 points!";
     });
   }
 
@@ -157,22 +160,8 @@ class _RecyclePageState extends State<RecyclePage> {
           ),
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Align(
-                  alignment: Alignment.topCenter,
-                  child: Text(
-                    'RecycleGreen',
-                    style: TextStyle(
-                      fontFamily: 'Google Sans',
-                      fontSize: 30,
-                      color: AppColors.textGreen,
-                      fontWeight: FontWeight.w700,
-                    ),
-                  ),
-                ),
-              ),
-              const H40CustomSizedBox(),
+              const PageTitleWidget(title: 'RecycleGreen'),
+              const H10CustomSizedBox(),
               SizedBox(
                 width: MediaQuery.of(context).size.width * .86,
                 height: MediaQuery.of(context).size.width * .86,
@@ -184,29 +173,11 @@ class _RecyclePageState extends State<RecyclePage> {
                     ),
                   ),
                   child: path == ""
-                      ? Align(
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Please select an\nimage or take a photo!',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontFamily: 'Cy Grotestk Key',
-                              fontSize: 26,
-                              color: AppColors.white,
-                            ),
-                          ),
-                        )
-                      : Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Image.file(
-                            File(
-                              path,
-                            ),
-                          ),
-                        ),
+                      ? const SelectImageTextWidget()
+                      : ImageWidget(path: path),
                 ),
               ),
-              const H40CustomSizedBox(),
+              const H10CustomSizedBox(),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -223,7 +194,7 @@ class _RecyclePageState extends State<RecyclePage> {
                   ),
                 ],
               ),
-              const H40CustomSizedBox(),
+              const H10CustomSizedBox(),
               Text(
                 label,
                 style: TextStyle(
@@ -233,13 +204,13 @@ class _RecyclePageState extends State<RecyclePage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
-              const H40CustomSizedBox(),
+              const H10CustomSizedBox(),
               Text(
                 congrats,
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontFamily: 'Google Sans',
-                  fontSize: 30,
+                  fontSize: 27,
                   color: AppColors.black,
                   fontWeight: FontWeight.w400,
                 ),
