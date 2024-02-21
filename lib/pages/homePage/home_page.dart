@@ -77,7 +77,7 @@ class _HomePageState extends State<HomePage> {
           IconButton(
             color: AppColors.primaryBlue,
             onPressed: () {
-              signOut();
+              signOut(context);
               showDialog(
                 context: context,
                 builder: (BuildContext context) {
