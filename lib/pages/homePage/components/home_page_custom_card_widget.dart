@@ -4,14 +4,11 @@ import 'package:green_perk/constants/app_colors.dart';
 class HomePageCustomCardWidget extends StatelessWidget {
   const HomePageCustomCardWidget({
     super.key,
-    required String steps,
     required this.title,
     required this.imagePath,
     required this.value,
-  }) : _steps = steps;
+  });
 
-  // ignore: unused_field
-  final String _steps;
   final String title;
   final String imagePath;
   final String value;
@@ -20,7 +17,7 @@ class HomePageCustomCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * .44,
-      height: MediaQuery.of(context).size.height * .2,
+      height: MediaQuery.of(context).size.width * .44,
       child: Card(
         color: Colors.transparent,
         elevation: 0,

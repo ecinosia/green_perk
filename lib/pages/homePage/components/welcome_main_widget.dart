@@ -15,7 +15,7 @@ class WelcomeMainWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * .9,
-      height: MediaQuery.of(context).size.height * .2,
+      height: MediaQuery.of(context).size.width * .44,
       child: Card(
         color: Colors.transparent,
         elevation: 0,

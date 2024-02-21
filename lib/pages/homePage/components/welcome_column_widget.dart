@@ -17,6 +17,7 @@ class WelcomeColumnWidget extends StatelessWidget {
       width: MediaQuery.of(context).size.width * .5,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           WelcomeCardWelcomeTextWidget(userName: userName),
           const WelcomeCardDescTextWidget(),

@@ -9,6 +9,7 @@ class WelcomeCardTreeImageWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Image.asset(
       'lib/assets/images/tree.png',
+      width: 125,
     );
   }
 }

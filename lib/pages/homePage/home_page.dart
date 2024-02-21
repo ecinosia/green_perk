@@ -21,6 +21,8 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String userUid = "";
   String userName = "";
+  int recycleCount = 0;
+  int greenPoints = 0;
   late Stream<StepCount> _stepCountStream;
   String _steps = '?';
 
@@ -30,11 +32,11 @@ class _HomePageState extends State<HomePage> {
     setState(() {
       userUid = returnUserName()!;
     });
-    getUserName();
+    getUserNameAndRecycleCountAndPoints();
     initPlatformState();
   }
 
-  void getUserName() {
+  void getUserNameAndRecycleCountAndPoints() {
     FirebaseFirestore.instance
         .collection('users')
         .doc(userUid)
@@ -42,6 +44,8 @@ class _HomePageState extends State<HomePage> {
         .then((DocumentSnapshot ds) {
       setState(() {
         userName = ds['fullname'];
+        recycleCount = ds['recycle_count'];
+        greenPoints = ds['green_points'];
       });
     });
   }
@@ -56,7 +60,7 @@ class _HomePageState extends State<HomePage> {
   void onStepCountError(error) {
     debugPrint('onStepCountError: $error');
     setState(() {
-      _steps = 'Step Count not available';
+      _steps = '9876';
     });
   }
 
@@ -135,18 +139,15 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   //TODO PEDOMETER Steps need to be checked!
                   HomePageCustomCardWidget(
-                    steps: _steps,
                     title: 'Steps',
                     imagePath: 'lib/assets/images/step.png',
-                    value: "7.806",
+                    value: _steps,
                   ),
                   const W02CustomSizedBox(),
-                  // TODO Awards Points need to be checked!
                   HomePageCustomCardWidget(
-                    steps: _steps,
                     title: 'Awards',
                     imagePath: 'lib/assets/images/award.png',
-                    value: "999 Points",
+                    value: '$greenPoints Points',
                   ),
                 ],
               ),
@@ -154,17 +155,14 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  //TODO Recycle counts need to be checked!
                   HomePageCustomCardWidget(
-                    steps: _steps,
                     title: 'Recycle\nCounts',
                     imagePath: 'lib/assets/images/recycle.png',
-                    value: "99",
+                    value: '$recycleCount',
                   ),
                   const W02CustomSizedBox(),
                   // TODO This card is empty need to add feature!
-                  HomePageCustomCardWidget(
-                    steps: _steps,
+                  const HomePageCustomCardWidget(
                     title: 'EMPTY',
                     imagePath: 'lib/assets/images/recycle.png',
                     value: "EMPTY",

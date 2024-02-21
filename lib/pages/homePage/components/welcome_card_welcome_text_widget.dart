@@ -11,12 +11,13 @@ class WelcomeCardWelcomeTextWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var userNameManipulated = userName.split(' ');
     return Text(
-      'Welcome $userName!',
+      'Welcome\n${userNameManipulated[0]}!',
       style: TextStyle(
         fontFamily: 'Google Sans',
         fontWeight: FontWeight.bold,
-        fontSize: 25,
+        fontSize: 22,
         color: AppColors.textGreen,
         overflow: TextOverflow.fade,
       ),
