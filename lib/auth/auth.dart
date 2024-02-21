@@ -20,6 +20,7 @@ void registerToFb(
       'email': emailController.text,
       'password': passwordController.text,
       'green_points': 0,
+      'recycle_count': 0,
     }).then((res) {
       showDialog(
         context: context,
