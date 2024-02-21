@@ -18,6 +18,7 @@ class WelcomeCardWelcomeTextWidget extends StatelessWidget {
         fontWeight: FontWeight.bold,
         fontSize: 25,
         color: AppColors.textGreen,
+        overflow: TextOverflow.fade,
       ),
     );
   }

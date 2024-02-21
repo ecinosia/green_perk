@@ -13,12 +13,15 @@ class WelcomeColumnWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        WelcomeCardWelcomeTextWidget(userName: userName),
-        const WelcomeCardDescTextWidget(),
-      ],
+    return SizedBox(
+      width: MediaQuery.of(context).size.width * .5,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          WelcomeCardWelcomeTextWidget(userName: userName),
+          const WelcomeCardDescTextWidget(),
+        ],
+      ),
     );
   }
 }

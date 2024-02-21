@@ -14,6 +14,7 @@ class WelcomeCardDescTextWidget extends StatelessWidget {
         fontFamily: 'Cy Grotestk Key',
         fontSize: 20,
         color: AppColors.textGreen,
+        overflow: TextOverflow.fade,
       ),
     );
   }
