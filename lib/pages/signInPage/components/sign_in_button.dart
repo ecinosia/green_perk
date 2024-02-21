@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/constants/app_colors.dart';
 
