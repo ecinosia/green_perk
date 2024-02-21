@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:go_router/go_router.dart';
 import 'package:green_perk/firebase_options.dart';
-import 'package:green_perk/testPages/chat_test.dart';
+import 'package:green_perk/pages/accountPage/account_page.dart';
+import 'package:green_perk/pages/greenBotPage/greenperks_chatbot_page.dart';
+import 'package:green_perk/pages/greenRewardsPage/green_reward_page.dart';
 import 'package:green_perk/pages/homePage/home_page.dart';
+import 'package:green_perk/pages/recyclePage/recycle_page.dart';
 import 'package:green_perk/pages/registerPage/register_page.dart';
+import 'package:green_perk/pages/saveTheGreenPage/save_the_green_page.dart';
 import 'package:green_perk/pages/signInPage/sign_in_page.dart';
 import 'package:green_perk/pages/signInRegisterPage/sign_in_register_page.dart';
 import 'package:green_perk/pages/welcomePage/welcome_page.dart';
@@ -23,7 +27,7 @@ final GoRouter _router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const ChatTestPage();
+        return const WelcomePage();
       },
       routes: <RouteBase>[
         GoRoute(
@@ -54,6 +58,36 @@ final GoRouter _router = GoRouter(
           path: 'sign_in_register_page/sign_up_page',
           builder: (BuildContext context, GoRouterState state) {
             return const RegisterPage();
+          },
+        ),
+        GoRoute(
+          path: 'recycle_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const RecyclePage();
+          },
+        ),
+        GoRoute(
+          path: 'greenbot_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const GreenBotPage();
+          },
+        ),
+        GoRoute(
+          path: 'save_the_green_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const SaveTheGreenPage();
+          },
+        ),
+        GoRoute(
+          path: 'green_rewards_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const GreenRewardPage();
+          },
+        ),
+        GoRoute(
+          path: 'account_page',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AccountPage();
           },
         ),
       ],
