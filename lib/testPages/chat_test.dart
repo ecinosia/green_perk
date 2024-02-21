@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:google_generative_ai/google_generative_ai.dart';
 
 class ChatTestPage extends StatefulWidget {
   const ChatTestPage({super.key});
@@ -9,9 +9,17 @@ class ChatTestPage extends StatefulWidget {
 }
 
 class _ChatTestPageState extends State<ChatTestPage> {
-  final gemini = Gemini.instance;
+  final model = GenerativeModel(
+      model: 'gemini-pro', apiKey: "AIzaSyDDOY0xzyK41CR5XN9K3zapzIDKcsAm7Nc");
+  bool loading = false;
   final List<String> chatHistory = [];
   final TextEditingController textController = TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    model;
+  }
 
   @override
   void dispose() {
@@ -19,18 +27,28 @@ class _ChatTestPageState extends State<ChatTestPage> {
     super.dispose();
   }
 
-  void sendMessage(String message) {
-    chatHistory.add("User: $message");
+  void sendMessage(String message) async {
+    setState(() {
+      loading = true;
+      textController.clear();
+    });
 
-    gemini.text(message).then((value) {
+    chatHistory.add("User: $message");
+    final prompt = message;
+    final content = [Content.text(prompt)];
+
+    try {
+      final response = await model.generateContent(content);
       setState(() {
-        chatHistory.add("Gemini: ${value?.output}");
+        chatHistory.add("Gemini: ${response.text}");
+        loading = false;
       });
-    }).catchError((e) {
+    } catch (e) {
       setState(() {
         chatHistory.add("Error: ${e.toString()}");
+        loading = false;
       });
-    });
+    }
   }
 
   @override
@@ -70,7 +88,14 @@ class _ChatTestPageState extends State<ChatTestPage> {
                     sendMessage(textController.text);
                     textController.clear();
                   },
-                  child: const Text('Submit'),
+                  child: loading
+                      ? const CircularProgressIndicator.adaptive(
+                          backgroundColor: Colors.white,
+                        )
+                      : const Icon(
+                          Icons.send_rounded,
+                          color: Colors.black,
+                        ),
                 ),
               ],
             ),
