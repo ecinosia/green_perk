@@ -44,7 +44,6 @@ class _NavBarState extends State<NavBar> {
       backgroundColor: AppColors.primaryGreen,
       child: ListView(
         padding: EdgeInsets.zero,
-        // ignore: prefer_const_literals_to_create_immutables
         children: [
           UserAccountsDrawerHeader(
             accountName: Text(
@@ -86,15 +85,14 @@ class _NavBarState extends State<NavBar> {
               color: AppColors.primaryBlue,
             ),
             title: Text(
-              "Recycle Material",
+              "RecycleGreen",
               style: TextStyle(
                 fontFamily: 'Google Sans',
                 fontSize: 16,
                 color: AppColors.white,
               ),
             ),
-            // TODO add camera page route here
-            onTap: () {},
+            onTap: () => context.go('/recycle_page'),
           ),
           const Divider(),
           ListTile(
@@ -103,15 +101,14 @@ class _NavBarState extends State<NavBar> {
               color: AppColors.primaryBlue,
             ),
             title: Text(
-              "Get Rewards",
+              "GreenReward",
               style: TextStyle(
                 fontFamily: 'Google Sans',
                 fontSize: 16,
                 color: AppColors.white,
               ),
             ),
-            //TODO add get reward page route here
-            onTap: () {},
+            onTap: () => context.go('/green_rewards_page'),
           ),
           //Divider used for space part with buttons.
           const Divider(),
@@ -121,15 +118,14 @@ class _NavBarState extends State<NavBar> {
               color: AppColors.primaryBlue,
             ),
             title: Text(
-              "greenperksChat",
+              "GreenBot",
               style: TextStyle(
                 fontFamily: 'Google Sans',
                 fontSize: 16,
                 color: AppColors.white,
               ),
             ),
-            // TODO add chatbot page route here
-            onTap: () {},
+            onTap: () => context.go('/greenbot_page'),
           ),
           const Divider(),
           ListTile(
@@ -138,15 +134,14 @@ class _NavBarState extends State<NavBar> {
               color: AppColors.primaryBlue,
             ),
             title: Text(
-              "Save Nature Info",
+              "SaveTheGreen",
               style: TextStyle(
                 fontFamily: 'Google Sans',
                 fontSize: 16,
                 color: AppColors.white,
               ),
             ),
-            // TODO add save nature info page route here
-            onTap: () {},
+            onTap: () => context.go('/save_the_green_page'),
           ),
           const Divider(),
           ListTile(
@@ -162,8 +157,7 @@ class _NavBarState extends State<NavBar> {
                 color: AppColors.white,
               ),
             ),
-            // TODO add account page route here
-            onTap: () {},
+            onTap: () => context.go('/account_page'),
           ),
           const Divider(),
           ListTile(
@@ -176,7 +170,7 @@ class _NavBarState extends State<NavBar> {
                 color: AppColors.white,
               ),
             ),
-            onTap: signOut,
+            onTap: () => signOut(context),
           ),
         ],
       ),
