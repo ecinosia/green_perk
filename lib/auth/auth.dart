@@ -19,6 +19,7 @@ void registerToFb(
       'fullname': fullNameController.text,
       'email': emailController.text,
       'password': passwordController.text,
+      'green_points': 0,
     }).then((res) {
       showDialog(
         context: context,
@@ -101,8 +102,9 @@ void signIn(BuildContext context, TextEditingController emailController,
   });
 }
 
-void signOut() {
+void signOut(BuildContext context) {
   auth.signOut();
+  context.go('/sign_in_register_page');
 }
 
 String? returnUserName() {
