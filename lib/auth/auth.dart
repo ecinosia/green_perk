@@ -3,14 +3,16 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
+//UPLOAD EMPLOYEE IMAGE
+
 final FirebaseAuth auth = FirebaseAuth.instance;
 void registerToFb(
-    BuildContext context,
-    TextEditingController fullNameController,
-    TextEditingController emailController,
-    TextEditingController passwordController) {
+  BuildContext context,
+  TextEditingController fullNameController,
+  TextEditingController emailController,
+  TextEditingController passwordController,
+) async {
   final dbRef = FirebaseFirestore.instance.collection("users");
-
   auth
       .createUserWithEmailAndPassword(
           email: emailController.text, password: passwordController.text)
@@ -21,6 +23,7 @@ void registerToFb(
       'password': passwordController.text,
       'green_points': 0,
       'recycle_count': 0,
+      'profile_picture_url': "",
     }).then((res) {
       showDialog(
         context: context,
