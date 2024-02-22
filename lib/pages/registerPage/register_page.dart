@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:green_perk/components/h40_custom_sized_box.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../constants/app_colors.dart';
 import 'components/custom_text_form_field_widget.dart';
@@ -27,12 +28,10 @@ class _RegisterPageState extends State<RegisterPage> {
       body: SingleChildScrollView(
         child: Container(
           width: double.infinity,
-          height: MediaQuery.of(context).size.height,
           decoration: BoxDecoration(
             color: AppColors.primaryGreen,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Hero(
@@ -40,7 +39,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 30),
+                      padding: const EdgeInsets.only(top: 70),
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Image.asset(
@@ -98,6 +97,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     passwordController: passwordController,
                     passwordConfirmController: passwordConfirmController,
                   ),
+                  const H40CustomSizedBox(),
                 ],
               ),
             ],

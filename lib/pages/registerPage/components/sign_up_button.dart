@@ -99,8 +99,12 @@ class _SignUpButtonState extends State<SignUpButton> {
             },
           );
         } else {
-          registerToFb(context, widget.fullNameController,
-              widget.emailController, widget.passwordController);
+          registerToFb(
+            context,
+            widget.fullNameController,
+            widget.emailController,
+            widget.passwordController,
+          );
         }
       },
       style: ElevatedButton.styleFrom(
