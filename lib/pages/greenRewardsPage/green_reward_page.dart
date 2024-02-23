@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:green_perk/auth/auth.dart';
 import 'package:green_perk/components/page_title_widget.dart';
 import 'package:image_network/image_network.dart';

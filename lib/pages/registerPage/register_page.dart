@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:green_perk/components/h40_custom_sized_box.dart';
-import 'package:image_picker/image_picker.dart';
-
 import '../../constants/app_colors.dart';
 import 'components/custom_text_form_field_widget.dart';
 import 'components/input_label.dart';
