@@ -162,11 +162,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   const W02CustomSizedBox(),
                   // TODO This card is empty need to add feature!
-                  const HomePageCustomCardWidget(
-                    title: 'EMPTY',
-                    imagePath: 'lib/assets/images/recycle.png',
-                    value: "EMPTY",
-                  ),
+                  // const HomePageCustomCardWidget(
+                  //   title: 'EMPTY',
+                  //   imagePath: 'lib/assets/images/recycle.png',
+                  //   value: "EMPTY",
+                  // ),
                 ],
               ),
             ],
