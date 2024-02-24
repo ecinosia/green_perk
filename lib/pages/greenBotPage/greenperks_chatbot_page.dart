@@ -20,8 +20,8 @@ class GreenBotPage extends StatefulWidget {
 class _GreenBotPageState extends State<GreenBotPage> {
   TextEditingController userMessageController = TextEditingController();
 
-  final model = GenerativeModel(
-      model: 'gemini-pro', apiKey: "AIzaSyDDOY0xzyK41CR5XN9K3zapzIDKcsAm7Nc");
+  final model =
+      GenerativeModel(model: 'YOUR_GEMINI_AI_MODEL', apiKey: "YOUR_API_KEY");
   final List<String> chatHistory = [];
   final List<String> chatSender = [];
 
